@@ -1,0 +1,83 @@
+@model IEnumerable<Softecnologia.Models.Usuario>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class= "text-center text-dark mb-4">Gestion de Usuario</h1>
+
+<p>
+    <a class="btn btn-primary " asp-action="Create">Nuevo Usuario</a>
+</p>
+@if (TempData["mensaje"] != null)
+{
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  @TempData["mensaje"]
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apellidos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoDocumento)
+            </th>
+ 
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MunicipioRes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rol)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellidos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoDocumento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.MunicipioRes)
+            </td>
+            <td>
+                    @if (item.Rol == true)
+                    {
+                        <p class="btn btn-outline-success">Administrador</p>
+                    }
+                    else
+                    {
+                        <p class="btn btn-outline-success">Vendedor</p>
+                    }
+                </td>
+            <td>
+                <a class="btn btn-info btn-sm " asp-action="Edit" asp-route-id="@item.Documento">Editar</a> |
+                <a class="btn btn-success btn-sm" asp-action="Details" asp-route-id="@item.Documento">Detalle</a> |
+                <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.Documento">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
